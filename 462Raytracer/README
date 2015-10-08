@@ -6,12 +6,6 @@ Overview
 In here you will find instructions for building the project and a
 short description of each source file.
 
-There is quite a bit of starter code for project 3. It contains math
-utility functions and classes, code to load the application, code to load
-models, and code to handle mouse/keyboard input.
-
-Report any bugs to the TAs.
-
 ---------------------------------------------------------------------------
 Building the Code
 ---------------------------------------------------------------------------
@@ -39,9 +33,6 @@ projects to XCode projects.
 WINDOWS NOTE: If you're using Windows, you'll have to add the "windows/bin"
 directory to your PATH environment variable so Windows can find the shared
 libraries the project will use.
-
-Note: Your program MUST COMPILE on the SCS Linux machines. If you use
-Windows, make sure to test on Linux well in advance of the deadline.
 
 ---------------------------------------------------------------------------
 Running the Program
