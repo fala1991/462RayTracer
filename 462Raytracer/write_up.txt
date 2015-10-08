@@ -1,0 +1,49 @@
+In general, I finished those basic requirements : 
+
+1. Implemented the Raytracer class.
+
+2. Write the interscetion test function and shadow test function for all kinds of geometry.
+	as well as handled arbitrary scaling, rotation and translation.
+
+3. Implemented the eye ray tracing and illumination using the Phong illumination.
+
+4. Added soft shadow, specular reflection and refraction effect.
+
+---------------------------------------------------------------------------------------
+
+For extra credit, I finished those features:
+
+1. Gloss effect. The flag of gloss effect is "-g", For instance, You can use "-g 0.2" in command line to see the gloss effect.
+	
+2. Depth of view. You can simply right click at any object in the scene to focus on it, then you can get a depth of view effect.
+
+3. Bouding volume hierachies Tree(BVH Tree). So I could render some complex scenes such like dragon.scene and victoria.scene
+
+4. Skybox. I changed the background color to a skybox. The flag of skybox effect is "-m", you can use "-m stpet" to activate a skybox (Which I get from the P2 ^_^ ).
+
+---------------------------------------------------------------------------------------
+
+Here is more details about what I have done in this project:
+
+First of all, I finished the Raytracer class, I added three more functions in the start code. One is "compute_illumination(const Intersection& info)" fuction which could compute the basic illumination color of the object by the intersection information. The basic illumination include diffuse color, texture color and soft shadows.
+So I did the shadow test in this function.
+
+The another one function is "refract(const Vector3& dir, const Vector3& norm, real_t n, Vector3& t_dir)". This function will compute the refraction direction from the incoming light direction by the refraction index 'n'.
+
+Last one is the trace_focus function. This function help me to determine the focus point of current scene, It receive a click point in the screen and will send a ray. If the ray hit any ojbect in the scene, It will be the focus point.
+
+For Geometry class. I implemented the intersection_test function and shadow_test function. The intersction_test function is optimized by BVH tree. In shadow_test function, since we do not need the material information and do not care about which object block the ray first. It is much simpler than intersection_test and of course optimized by BVH tree.
+
+The to_local function will translate the incoming ray to the local coordinate of the geometry.
+
+Specifically, For model class, I wrote an internal bvh tree.
+
+You might notice there are another classes in scene folder, cubemap and bvhnode. cubemap class will load textures from the cubemap folder, and return the texture color based on direction (texCube function).
+
+bvhnode class is for the bvhtree. The bvhnode class inherited from the Geometry class, so I can use same virtual functions such like intersection_test and shadow_test. The another reason is I can simply call intersection_test for left and right node whatever it is a node or a geometry object.
+
+In the constructor of bvhnode, it receive a geometry list as Vector<Geometry>. In order to create a roughly balanced tree, it will do a quick partition by the midpoint of all objects.
+
+I also wrote the texture sampling function using hermite interpolation in Texture::sample(Vector2 coord) function.
+
+Last but not least, there are several helper functions in randomgeo.
